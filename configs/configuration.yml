@@ -1,0 +1,25 @@
+# Logging settings.
+logging:
+ # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: DEBUG
+  loggers:
+    "org.hibernate": DEBUG
+
+  appenders:
+  - type: file
+    threshold: info
+    logFormat: "%-5p [%d{ISO8601}] [%X{reqId} %X{txnId}] %replace(%c: %m){'\n', '\n '}%n%replace(%ex){'(?m)^(.)',' $1'}%nopex"
+    currentLogFilename: /myntra/wall-feed/logs/wall-feed.log
+    archivedLogFilenamePattern: /myntra/wall-feed/logs/wall-feed-%d.log.gz
+    archivedFileCount: 5
+    timeZone: IST
+
+#  - type: console
+#    logFormat: "%-5p [%d{ISO8601}] [%X{reqId} %X{txnId}] %replace(%c: %m){'\n', '\n '}%n%replace(%ex){'(?m)^(.)',' $1'}%nopex"
+#    # Do not display log statements belxow this threshold to stdout.
+#    threshold: INFO
+
+
+configPaths:
+  pathConfiguration:
+    host: "production-server.amazonaws.com"
